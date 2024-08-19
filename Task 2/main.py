@@ -21,4 +21,7 @@ v_x_b = (0.5 * (b_profit_1 - m_x_b) ** 2) + (0.5 * (b_profit_2 - m_x_b) ** 2)
 
 print(f"Variation:\n\tV(X_A) = {v_x_a}\n\tV(X_B) = {v_x_b}")
 
+s_x_a = math.sqrt(v_x_a)
+s_x_b = math.sqrt(v_x_b)
+
 
