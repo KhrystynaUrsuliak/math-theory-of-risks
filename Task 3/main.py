@@ -40,3 +40,16 @@ risk_premium_2 = expected_return_2 - de2
 risk_premium_3 = expected_return_3 - de3
 
 print(f"Risk Premium 1 = {risk_premium_1}\nRisk Premium 2 = {risk_premium_2}\nRisk Premium 3 = {risk_premium_3}\n")
+
+if (expected_efficiency_1 > expected_efficiency_2) and (expected_efficiency_1 > expected_efficiency_3):
+  print('The person will choose L(-20; 0.5; -10).')
+elif (expected_efficiency_2 > expected_efficiency_1) and (expected_efficiency_2 > expected_efficiency_3):
+  print('The person will choose L(-25; 0.5; -15).')
+else:
+  print('The person will choose L(-29; 0.5; -19).')
+
+
+if (risk_premium_1 and risk_premium_2 and risk_premium_3) > 0:
+  print('The person is not prone to risk.')
+else:
+  print('The person is prone to risk.')
