@@ -38,5 +38,3 @@ csv_x_a = ssv_x_a / m_x_a
 csv_x_b = ssv_x_b / m_x_b
 
 print(f"Coefficient of Semi-Variation:\n\tCSV(X_A) = {csv_x_a}\n\tCSV(X_B) = {csv_x_b}\n")
-
-
