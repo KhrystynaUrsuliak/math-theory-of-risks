@@ -4,7 +4,7 @@ def u(x):
   return math.log(x + 30)
 
 def expected_return(x1, p, x2):
-  return (x1 + x2) * p
+  return p * x1 + p * x2
 
 print('U(x) = ln(x + 30), x > -30\n\nL1(-20; 0.5; -10)\nL2(-25; 0.5; -15)\nL3(-29; 0.5; -19)\n')
 
