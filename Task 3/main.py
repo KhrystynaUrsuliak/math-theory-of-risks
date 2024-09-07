@@ -6,7 +6,7 @@ def u(x):
 def expected_return(x1, p, x2):
   return p * x1 + p * x2
 
-print('U(x) = ln(x + 30), x > -30\n\nL1(-20; 0.5; -10)\nL2(-25; 0.5; -15)\nL3(-29; 0.5; -19)\n')
+print('U(x) = ln(x + 30), x > -30\n\nL\u2081(-20; 0.5; -10)\nL\u2082(-25; 0.5; -15)\nL\u2083(-29; 0.5; -19)\n')
 
 x1 = -20
 x2 = -10
@@ -42,11 +42,11 @@ risk_premium_3 = expected_return_3 - de3
 print(f"Risk Premium 1 = {risk_premium_1}\nRisk Premium 2 = {risk_premium_2}\nRisk Premium 3 = {risk_premium_3}\n")
 
 if (expected_efficiency_1 > expected_efficiency_2) and (expected_efficiency_1 > expected_efficiency_3):
-  print('The person will choose L(-20; 0.5; -10).')
+  print('The person will choose L\u2081(-20; 0.5; -10).')
 elif (expected_efficiency_2 > expected_efficiency_1) and (expected_efficiency_2 > expected_efficiency_3):
-  print('The person will choose L(-25; 0.5; -15).')
+  print('The person will choose L\u2082(-25; 0.5; -15).')
 else:
-  print('The person will choose L(-29; 0.5; -19).')
+  print('The person will choose L\u2083(-29; 0.5; -19).')
 
 
 if (risk_premium_1 and risk_premium_2 and risk_premium_3) > 0:
