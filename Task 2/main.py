@@ -38,3 +38,8 @@ csv_x_a = ssv_x_a / m_x_a
 csv_x_b = ssv_x_b / m_x_b
 
 print(f"Coefficient of Semi-Variation:\n\tCSV(X_A) = {csv_x_a}\n\tCSV(X_B) = {csv_x_b}\n")
+
+if csv_x_a > csv_x_b:
+  print('A risk-prone person is more likely to choose share package A, whilst a risk-averse person is likely to choose share package B.')
+else:
+  print('A risk-prone person is more likely to choose share package B, whilst a risk-averse person is likely to choose share package A.')
