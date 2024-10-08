@@ -71,3 +71,4 @@ def calculate_return_and_risk(solution):
   expected_return = w1 * err_1 + w2 * err_2 + w3 * err_3
 
   weights = np.array([w1, w2, w3])
+  
