@@ -1,6 +1,7 @@
+from math import sqrt
 from sympy import symbols, Eq, solve
 import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd
 
 err_1 = 10
 err_2 = 20
@@ -69,15 +70,6 @@ def ensure_capital_growth():
   return solution
 
 
-def expected_return(x1_val, x2_val, x3_val):
-  return err_1 * x1_val + err_2 * x2_val + err_3 * x3_val
-
-
-def risk(x1_val, x2_val, x3_val):
-  sigma_squared_val = (ssv_1 ** 2) * (x1_val ** 2) + (ssv_2 ** 2) * (x2_val ** 2) + (ssv_3 ** 2) * (x3_val ** 2) + 2 * ssv_1 * ssv_2 * x1_val * x2_val * cc_12 + 2 * ssv_1 * ssv_3 * x1_val * x3_val * cc_13 + 2 * ssv_2 * ssv_3 * x2_val * x3_val * cc_23
-  return np.sqrt(sigma_squared_val)
-
-
 solution_1 = preserve_capital()
 solution_2 = get_desired_profit()
 solution_3 = ensure_capital_growth()
@@ -89,4 +81,4 @@ print(f"A) Структура ПЦП щодо задачі збереження 
 
 print(f"Б) Структура ПЦП щодо задачі одержання бажаного прибутку при m_П = 30%:\n\tА\u2081 = {solution_2[x1]} \n\tА\u2082 = {solution_2[x2]} \n\tА\u2083 = {solution_2[x3]}\n\n")
 
-print(f"В) Структура ПЦП щодо задачі забезпечення зростання капіталу при σ_p = 15%:\n\tА\u2081 = {x1_val} \n\tА\u2082 = {x2_val} \n\tА\u2083 = {x3_val}\n\n")
+print(f"В) Структура ПЦП щодо задачі забезпечення зростання капіталу при σ_П = 15%:\n\tА\u2081 = {x1_val} \n\tА\u2082 = {x2_val} \n\tА\u2083 = {x3_val}\n\n")
