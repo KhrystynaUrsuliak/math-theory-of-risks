@@ -1,5 +1,6 @@
 from sympy import symbols, Eq, solve
 import numpy as np
+import matplotlib.pyplot as plt
 
 err_1 = 10
 err_2 = 20
@@ -22,7 +23,7 @@ sigma_squared = (ssv_1 ** 2) * (x1 ** 2) + (ssv_2 ** 2) * (x2 ** 2) + (ssv_3 ** 
 constraint = x1 + x2 + x3 - 1
 
 
-def minimize_risk():
+def preserve_capital():
   L = sigma_squared + lambd * constraint
   dl_dx1 = L.diff(x1)
   dl_dx2 = L.diff(x2)
@@ -35,7 +36,7 @@ def minimize_risk():
   return solution
 
 
-def maximize_return():
+def get_desired_profit():
   expected_return_constraint = err_1 * x1 + err_2 * x2 + err_3 * x3 - 30
   L2 = sigma_squared + lambd * constraint + lambd * expected_return_constraint
 
@@ -51,24 +52,42 @@ def maximize_return():
   return solution
 
 
-def capital_growth():
+def ensure_capital_growth():
+  mu = symbols('mu')  
   risk_constraint = sigma_squared - 15 ** 2 
-  L3 = sigma_squared + lambd * constraint + lambd * risk_constraint
+  L3 = sigma_squared + lambd * constraint + mu * risk_constraint  
 
   dl_dx1 = L3.diff(x1)
   dl_dx2 = L3.diff(x2)
   dl_dx3 = L3.diff(x3)
   dl_dlambd = L3.diff(lambd)
+  dl_dmu = L3.diff(mu)
 
-  equations_3 = [Eq(dl_dx1, 0), Eq(dl_dx2, 0), Eq(dl_dx3, 0), Eq(dl_dlambd, 0)]
-  solution = solve(equations_3, (x1, x2, x3, lambd))
+  equations_3 = [Eq(dl_dx1, 0), Eq(dl_dx2, 0), Eq(dl_dx3, 0), Eq(dl_dlambd, 0), Eq(dl_dmu, 0)]  
+  solution = solve(equations_3, (x1, x2, x3, lambd, mu))  
 
   return solution
 
-def calculate_return_and_risk(solution):
-  w1, w2, w3 = solution[x1], solution[x2], solution[x3]
 
-  expected_return = w1 * err_1 + w2 * err_2 + w3 * err_3
+def expected_return(x1_val, x2_val, x3_val):
+  return err_1 * x1_val + err_2 * x2_val + err_3 * x3_val
 
-  weights = np.array([w1, w2, w3])
-  
+
+def risk(x1_val, x2_val, x3_val):
+  sigma_squared_val = (ssv_1 ** 2) * (x1_val ** 2) + (ssv_2 ** 2) * (x2_val ** 2) + (ssv_3 ** 2) * (x3_val ** 2) + 2 * ssv_1 * ssv_2 * x1_val * x2_val * cc_12 + 2 * ssv_1 * ssv_3 * x1_val * x3_val * cc_13 + 2 * ssv_2 * ssv_3 * x2_val * x3_val * cc_23
+  return np.sqrt(sigma_squared_val)
+
+
+solution_1 = preserve_capital()
+solution_2 = get_desired_profit()
+solution_3 = ensure_capital_growth()
+
+for i, sol in enumerate(solution_3):
+    x1_val, x2_val, x3_val = sol[0], sol[1], sol[2]
+
+print(f"A) Структура ПЦП щодо задачі збереження капіталу:\n\tА\u2081 = {solution_1[x1]} \n\tА\u2082 = {solution_1[x2]} \n\tА\u2083 = {solution_1[x3]}\n\n")
+
+print(f"Б) Структура ПЦП щодо задачі одержання бажаного прибутку при m_П = 30%:\n\tА\u2081 = {solution_2[x1]} \n\tА\u2082 = {solution_2[x2]} \n\tА\u2083 = {solution_2[x3]}\n\n")
+
+print(f"В) Структура ПЦП щодо задачі забезпечення зростання капіталу при σ_p = 15%:\n\tА\u2081 = {x1_val} \n\tА\u2082 = {x2_val} \n\tА\u2083 = {x3_val}\n\n")
+
