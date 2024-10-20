@@ -82,3 +82,33 @@ print(f"A) Структура ПЦП щодо задачі збереження 
 print(f"Б) Структура ПЦП щодо задачі одержання бажаного прибутку при m_П = 30%:\n\tА\u2081 = {solution_2[x1]} \n\tА\u2082 = {solution_2[x2]} \n\tА\u2083 = {solution_2[x3]}\n\n")
 
 print(f"В) Структура ПЦП щодо задачі забезпечення зростання капіталу при σ_П = 15%:\n\tА\u2081 = {x1_val} \n\tА\u2082 = {x2_val} \n\tА\u2083 = {x3_val}\n\n")
+
+portfolios = {
+    "А\u2081": {"A1": 0.896358543417367, "A2": 0.0728291316526611, "A3": 0.0308123249299720},
+    "А\u2082": {"A1": 1.48670926604630, "A2": 0.306633786122049, "A3": 0.160919383626034},
+    "А\u2083": {"A1": 3.17426902710791, "A2": -1.69693209029153, "A3": -0.477336936816380}
+}
+
+def expected_return(portfolio):
+    A1, A2, A3 = portfolio["A1"], portfolio["A2"], portfolio["A3"]
+    return A1 * err_1 + A2 * err_2 + A3 * err_3
+
+def risk(portfolio):
+    A1, A2, A3 = portfolio["A1"], portfolio["A2"], portfolio["A3"]
+    sigma_squared = (A1 ** 2) * (ssv_1 ** 2) + (A2 ** 2) * (ssv_2 ** 2) + (A3 ** 2) * (ssv_3 ** 2) \
+                    + 2 * A1 * A2 * ssv_1 * ssv_2 * cc_12 + 2 * A1 * A3 * ssv_1 * ssv_3 * cc_13 \
+                    + 2 * A2 * A3 * ssv_2 * ssv_3 * cc_23
+    return np.sqrt(sigma_squared)
+
+results = {}
+for portfolio_name, portfolio_values in portfolios.items():
+    exp_return = expected_return(portfolio_values)
+    portfolio_risk = risk(portfolio_values)
+    results[portfolio_name] = {
+        "Сподівана Норма Прибутку (%)": exp_return,
+        "Оцінка Ризику (%)": portfolio_risk
+    }
+
+results_df = pd.DataFrame(results).T
+print('Г) Сподівана норма прибутку та оцінка ризику для кожного портфеля:')
+print(results_df)
